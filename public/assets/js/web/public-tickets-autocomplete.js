@@ -1,0 +1,1 @@
+(()=>{"use strict";$(document).ready((function(){$("#publicTicketsSearch").on("keyup",(function(){var c=$(this).val();""!=c?$.ajax({url:publicTicketSearchUrl,method:"GET",data:{searchTerm:c},success:function(c){$("#publicTicketsSearchResults").fadeIn(),$("#publicTicketsSearchResults").html(c)}}):$("#publicTicketsSearchResults").fadeOut()}))}))})();
