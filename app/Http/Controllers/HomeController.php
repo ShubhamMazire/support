@@ -93,7 +93,10 @@ class HomeController extends Controller
     {
         $input = $request->only(['ticket_id', 'email']);
         $ticket = $this->webHomeRepository->searchTicket($input);
-
+        if((isset($ticket['type']) != null) && $ticket['type'] == 'private')
+        {
+            return redirect('login');
+        }
         return view('web.view_ticket', compact('ticket'));
     }
 
@@ -108,9 +111,9 @@ class HomeController extends Controller
     {
         $searchTerm = strtolower($request->get('searchTerm'));
         if ($searchTerm) {
-            $publicTickets = Ticket::whereIsPublic(1)->where(function (Builder $query) use ($searchTerm){
-                return $query->where('title', 'LIKE', '%'.$searchTerm.'%')
-                    ->orWhere('email', 'LIKE', '%'.$searchTerm.'%');
+            $publicTickets = Ticket::whereIsPublic(1)->where(function (Builder $query) use ($searchTerm) {
+                return $query->where('title', 'LIKE', '%' . $searchTerm . '%')
+                    ->orWhere('email', 'LIKE', '%' . $searchTerm . '%');
             })->get();
 
             return view('web.public_tickets_results', compact('publicTickets'))->render();

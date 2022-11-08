@@ -1,13 +1,13 @@
 <aside id="sidebar-wrapper">
     <div class="sidebar-brand h-auto lh-unset mt-4 custom-flex">
-        <img src="{{ asset($settings['logo']) }}" width="70px" class="navbar-brand-full" alt=""/>&nbsp;&nbsp;
+        <img src="{{ asset($settings['logo']) }}" width="70px" class="navbar-brand-full" alt="" />&nbsp;&nbsp;
         <a href="{{ url('/') }}" class="pl-2 text-wrap text-break w-75">{{ $settings['application_name'] }}</a>
     </div>
     <div class="sidebar-brand sidebar-brand-sm">
         <div class="d-flex justify-content-center align-items-center h-100 w-100">
             <a href="{{ url('/') }}" class="small-sidebar-text">
-                <img class="navbar-brand-full" src="{{ asset('assets/img/infyom-logo.png') }}"
-                     alt="{{config('app.name')}}"/>
+                <img class="navbar-brand-full" src="{{ asset('assets/img/uploads/2/lg.png') }}"
+                    alt="{{config('app.name')}}" />
             </a>
         </div>
     </div>
@@ -54,7 +54,8 @@
         <li class="{{ Request::is('conversations*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('conversations') }}"><i class="far fa-comments"></i>
                 <span>{{ __('messages.conversations') }}</span>
-                <span class="badge badge-pill badge-light conversation-badge" id="sidebar-message-count">{{ getConversationCount() }}</span>
+                <span class="badge badge-pill badge-light conversation-badge"
+                    id="sidebar-message-count">{{ getConversationCount() }}</span>
             </a>
         </li>
         @role('Admin')

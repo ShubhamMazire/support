@@ -61,15 +61,21 @@ class WebHomeRepository extends BaseRepository
         if(empty($ticket)){
             return null;
         }
-        if ($ticket->is_public || (\Auth::check() && \Auth::user()->hasRole('Admin'))) {
-            return $ticket;
-        }
+
         $user = \Auth::user();
         if ($user) {
             $isAgent = $ticket->assignTo()->where('user_id', '=', $user->id)->exists();
             if ($ticket->created_by == $user->id || $isAgent) {
                 return $ticket;
             }
+        }
+
+        if ($ticket->is_public || (\Auth::check() && \Auth::user()->hasRole('Admin'))) {
+            $ticket['type'] = 'public';
+            return $ticket;
+        }else{
+            $ticket['type'] = 'private';
+            return $ticket;
         }
 
         return null;
